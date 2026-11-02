@@ -91,27 +91,28 @@ export function seedDemo(db, cfg, { days = 120, only } = {}) {
   }
 
   if (want('audit')) {
+    // Mirrors the real audit of PeteRusso.com run on 2026-11-02, so the first view is accurate.
+    // Replaced by a live audit on the first collection.
     saveAudit(db, {
-      url: cfg.brand.siteUrl, score: 68,
+      url: cfg.brand.siteUrl, score: 52,
       checks: [
         { id: 'https', label: 'Served over HTTPS', pass: true, weight: 10 },
-        { id: 'title', label: 'Title tag present (30–60 chars)', pass: false, value: name, weight: 10 },
+        { id: 'title', label: 'Title tag present (30–60 chars)', pass: true, value: `${name} - Executive Leadership Coaching`, weight: 10 },
         { id: 'title_name', label: `Title contains "${name}"`, pass: true, weight: 10 },
         { id: 'meta_description', label: 'Meta description (70–160 chars)', pass: false, value: '', weight: 8 },
-        { id: 'h1', label: 'Exactly one H1', pass: true, value: name, weight: 6 },
+        { id: 'h1', label: 'Exactly one H1', pass: true, value: `About ${name}`, weight: 6 },
         { id: 'h1_name', label: `H1 mentions "${name}"`, pass: true, weight: 6 },
-        { id: 'canonical', label: 'Canonical URL set', pass: true, weight: 5 },
+        { id: 'canonical', label: 'Canonical URL set', pass: false, weight: 5 },
         { id: 'og', label: 'Open Graph image for social sharing', pass: false, weight: 5 },
         { id: 'schema_person', label: 'Person schema (JSON-LD) for knowledge panel', pass: false, weight: 10 },
         { id: 'schema_sameas', label: 'Schema "sameAs" links to social profiles', pass: false, weight: 8 },
-        { id: 'social_links', label: 'Links to social profiles on page', pass: true, value: 'instagram.com, linkedin.com', weight: 4 },
-        { id: 'img_alt', label: 'All images have alt text', pass: false, value: '4 of 11 missing', weight: 4 },
-        { id: 'content', label: 'At least 300 words of content on home page', pass: true, value: '540 words', weight: 6 },
-        { id: 'robots', label: 'robots.txt reachable', pass: true, weight: 4 },
-        { id: 'sitemap', label: 'sitemap.xml reachable', pass: true, weight: 4 },
-        { id: 'speed', label: 'Mobile performance score ≥ 80', pass: false, value: '62/100', weight: 10 },
+        { id: 'social_links', label: 'Links to social profiles on page', pass: false, value: 'linkedin.com', weight: 4 },
+        { id: 'img_alt', label: 'All images have alt text', pass: true, value: '0 of 4 missing', weight: 4 },
+        { id: 'content', label: 'At least 300 words of content on home page', pass: true, value: '904 words', weight: 6 },
+        { id: 'robots', label: 'robots.txt reachable', pass: false, weight: 4 },
+        { id: 'sitemap', label: 'sitemap.xml reachable', pass: false, weight: 4 },
       ],
-      pagespeed: { performance: 62, seo: 85, accessibility: 88, bestPractices: 92, lcp: '3.8 s', cls: '0.04', tbt: '310 ms' },
+      pagespeed: null,
     }, true, new Date(Date.now() - 3600e3).toISOString());
   }
 }

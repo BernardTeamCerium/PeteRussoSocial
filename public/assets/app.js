@@ -28,6 +28,7 @@ function showTab(tab) {
   document.querySelectorAll('.section').forEach((s) => s.classList.toggle('active', s.id === `tab-${tab}`));
   $('#page-title').textContent = TITLES[tab];
   history.replaceState(null, '', `#${tab}`);
+  window.scrollTo(0, 0);
   renderTab(tab);
 }
 $('#nav').addEventListener('click', (e) => { const b = e.target.closest('button[data-tab]'); if (b) showTab(b.dataset.tab); });

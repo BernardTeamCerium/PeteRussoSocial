@@ -46,6 +46,7 @@ export function buildConfig(env = process.env) {
     dbFile: env.DB_FILE || path.join(ROOT, 'data', 'peterusso.db'),
     brand: {
       name: brandName,
+      tagline: env.BRAND_TAGLINE ?? 'Executive Leadership Coaching',
       domain,
       siteUrl: `https://${domain}/`,
       queries: parseList(env.BRAND_QUERIES).length ? parseList(env.BRAND_QUERIES) : [`"${brandName}"`, domain],

@@ -13,6 +13,10 @@ One place to monitor and report on **Pete Russo** and **PeteRusso.com**:
 
 The app has **no npm dependencies**. It runs on Node.js ≥ 22.13, uses the built-in SQLite, and ships Chart.js in `public/assets/vendor`. Until a data source is connected, its section shows clearly labelled **demo data**, so the dashboard is usable on day one. Demo rows are deleted automatically as soon as real data arrives.
 
+## Branding
+
+The dashboard and the shared reports use PeteRusso.com's look: the site's navy, blue (#2a97fd) and mint (#02f5a3) colors, its Bebas Neue and Plus Jakarta Sans fonts (self-hosted in `public/assets/fonts`, SIL Open Font License), and Pete's photos from the site (`public/assets/brand/`). The colors are CSS variables at the top of `public/assets/styles.css`. To use a new photo, replace the two JPEGs in `public/assets/brand/`. `BRAND_TAGLINE` sets the banner text.
+
 ## Quick start
 
 ```bash
@@ -38,7 +42,7 @@ docker build -t peterusso-social .
 docker run -d -p 3000:3000 --env-file .env -v peterusso-data:/data -v $PWD/credentials:/app/credentials:ro peterusso-social
 ```
 
-Set `ADMIN_PASSWORD` and `BASE_URL` (the public URL, used in share links) in production.
+Set `ADMIN_PASSWORD` and `BASE_URL` (the public URL, used in share links) in production. If the server reaches the internet through an HTTP proxy, also set `NODE_USE_ENV_PROXY=1`. Node's built-in fetch ignores `HTTPS_PROXY` otherwise.
 
 ## Connecting data sources
 

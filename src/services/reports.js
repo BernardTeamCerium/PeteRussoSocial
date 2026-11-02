@@ -15,7 +15,7 @@ export function buildReport(db, cfg, { days = 30, sections = SECTIONS, minReleva
   const recommendations = buildRecommendations({ audit, rankings, mentions, social, analytics, cfg });
   const has = (s) => sections.includes(s);
   return {
-    brand: { name: cfg.brand.name, domain: cfg.brand.domain },
+    brand: { name: cfg.brand.name, domain: cfg.brand.domain, tagline: cfg.brand.tagline },
     generatedAt: new Date().toISOString(),
     days,
     sections,

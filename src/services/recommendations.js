@@ -4,14 +4,14 @@
  */
 const FIXES = {
   https: ['Move the site fully to HTTPS', 'Serve the whole site over HTTPS and redirect http:// to https://.'],
-  title: ['Rewrite the home-page title tag', 'Make the home-page <title> 30–60 characters and start it with "Pete Russo", e.g. "Pete Russo | <what he does>".'],
+  title: ['Rewrite the home-page title tag', 'Make the home-page <title> 30–60 characters and start it with "Pete Russo", e.g. "Pete Russo - Executive Leadership Coaching".'],
   title_name: ['Put "Pete Russo" in the home-page title', 'The title tag is the strongest on-page signal for a name search. Lead with "Pete Russo".'],
   meta_description: ['Write a meta description', 'Write a 70–160 character meta description that says who Pete Russo is and what visitors can do on the site. Google often uses it as the search snippet.'],
   h1: ['Use exactly one H1 heading', 'The home page should have one H1 that states the page topic.'],
   h1_name: ['Put "Pete Russo" in the H1', 'Make the main heading say "Pete Russo" so Google ties the page to the name.'],
   canonical: ['Add a canonical URL', 'Add <link rel="canonical" href="https://peterusso.com/"> so duplicate versions (www / non-www / trailing slash) don\'t split ranking signals.'],
   og: ['Add social sharing (Open Graph) tags', 'Add og:title, og:description and og:image so links to PeteRusso.com look good when shared on social media.'],
-  schema_person: ['Add Person schema markup', 'Add Person JSON-LD (name, jobTitle, image, url). It is the main input for a Google Knowledge Panel and tells Google which "Pete Russo" the site is about.'],
+  schema_person: ['Add Person schema markup', 'Add Person JSON-LD (name, jobTitle "Executive Leadership Coach", image, url). It is the main input for a Google Knowledge Panel and tells Google which "Pete Russo" the site is about.'],
   schema_sameas: ['Link all official profiles in schema "sameAs"', 'List every official profile (Instagram, LinkedIn, X, YouTube, Facebook, Wikidata if any) in the Person schema "sameAs" array. This connects them into one entity across the web.'],
   social_links: ['Cross-link the site and social profiles', 'Link to the official social profiles from the site header or footer, and link back to PeteRusso.com from every profile bio.'],
   img_alt: ['Add alt text to images', 'Give every image descriptive alt text, e.g. "Pete Russo speaking at …".'],

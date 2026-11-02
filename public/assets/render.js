@@ -20,19 +20,21 @@ const demoPill = (on) => (on ? ' <span class="pill demo" title="Connect this dat
 // ── Charts (Chart.js loaded globally) ──
 const charts = new Map();
 const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
-export const PALETTE = ['#1f5eff', '#e8710a', '#11a37f', '#c2185b', '#7b61ff', '#8d6e63', '#00897b'];
+// PeteRusso.com brand colours first (blue, navy, mint, pink), then supporting hues
+export const PALETTE = ['#2a97fd', '#0f172a', '#02c98a', '#ff477e', '#f5a524', '#7c5cff', '#64748b'];
 
 export function chart(id, type, data, options = {}) {
   const el = document.getElementById(id);
   if (!el || !window.Chart) return;
   charts.get(id)?.destroy();
+  window.Chart.defaults.font.family = css('--font');
   const grid = css('--line'), ink = css('--muted');
   charts.set(id, new window.Chart(el, {
     type, data,
     options: {
       responsive: true, maintainAspectRatio: false, animation: false,
       interaction: { mode: 'index', intersect: false },
-      plugins: { legend: { labels: { color: ink, boxWidth: 12 } } },
+      plugins: { legend: { labels: { color: ink, boxWidth: 12, font: { family: css('--font') } } } },
       scales: type === 'doughnut' ? {} : {
         x: { ticks: { color: ink, maxTicksLimit: 8 }, grid: { display: false } },
         y: { ticks: { color: ink }, grid: { color: grid } },
@@ -46,7 +48,13 @@ const shortDate = (d) => new Date(`${d}T00:00:00Z`).toLocaleDateString('en-US', 
 // ── Overview ──
 export function renderOverview(el, rep) {
   const o = rep.overview;
+  const [first, ...rest] = rep.brand.name.split(' ');
   el.innerHTML = `
+    <div class="hero"><div class="hero-body">
+      ${rep.brand.tagline ? `<div class="eyebrow">${esc(rep.brand.tagline)}</div>` : ''}
+      <h2>${esc(first)} <span class="hl">${esc(rest.join(' '))}</span></h2>
+      <p>Brand, search and social performance for ${esc(rep.brand.domain)}: last ${rep.days} days.</p>
+    </div></div>
     <div class="grid kpis">
       ${kpi('Web mentions', fmt(o.mentions.value), delta(o.mentions.change))}
       ${kpi('Avg sentiment', `${o.sentiment > 0 ? '+' : ''}${o.sentiment}`, '<span class="small muted">−1 negative … +1 positive</span>')}
