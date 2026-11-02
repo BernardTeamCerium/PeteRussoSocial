@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Pete Russo Social Command Center</title>
+  <link rel="stylesheet" href="/assets/styles.css">
+  <script src="/assets/vendor/chart.umd.js"></script>
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <div class="brand"><b id="brand-name">Pete Russo</b><span class="small muted" id="brand-domain">peterusso.com</span></div>
+    <nav class="nav" id="nav">
+      <button data-tab="overview" class="active">Overview</button>
+      <button data-tab="mentions">Web mentions</button>
+      <button data-tab="social">Social engagement</button>
+      <button data-tab="rankings">Rankings &amp; SEO</button>
+      <button data-tab="analytics">Website analytics</button>
+      <button data-tab="plan">Action plan <span class="badge" id="high-count" hidden></span></button>
+      <button data-tab="share">Share updates</button>
+      <button data-tab="settings">Settings &amp; sources</button>
+    </nav>
+  </aside>
+  <main>
+    <div class="topbar">
+      <h1 id="page-title">Overview</h1>
+      <span class="spacer"></span>
+      <select id="days" aria-label="Date range">
+        <option value="7">Last 7 days</option>
+        <option value="30" selected>Last 30 days</option>
+        <option value="90">Last 90 days</option>
+      </select>
+      <button class="btn primary" id="collect">Collect now</button>
+    </div>
+    <div id="demo-notice" class="notice" hidden></div>
+
+    <section class="section active" id="tab-overview"><div id="overview"></div></section>
+
+    <section class="section" id="tab-mentions">
+      <div id="mentions-summary"></div>
+      <div class="card" style="margin-top:16px">
+        <div class="card-head"><h2>Mentions feed</h2><a class="btn small" id="csv" href="/api/mentions.csv">Export CSV</a></div>
+        <div class="filters">
+          <input id="m-q" placeholder="Search title, outlet…" aria-label="Search mentions">
+          <select id="m-source" aria-label="Source"><option value="">All sources</option><option value="google_news">Google News</option><option value="web">Web</option><option value="reddit">Reddit</option><option value="youtube">YouTube</option><option value="hacker_news">Hacker News</option><option value="gdelt">Global news</option></select>
+          <select id="m-status" aria-label="Status"><option value="">All (except "not him")</option><option value="new">New</option><option value="flagged">Flagged</option><option value="reviewed">Reviewed</option><option value="irrelevant">Marked "not him"</option></select>
+          <select id="m-rel" aria-label="Minimum match"><option value="0.4">Likely about Pete (≥40%)</option><option value="0.6">Strong match (≥60%)</option><option value="0">Everything</option></select>
+        </div>
+        <div id="mentions-list"></div>
+      </div>
+    </section>
+
+    <section class="section" id="tab-social">
+      <div id="social"></div>
+      <div class="card" style="margin-top:16px">
+        <h2>Enter numbers manually</h2>
+        <p class="small muted">For LinkedIn, TikTok, Threads, or any platform without an API connection. One entry per platform per day.</p>
+        <form id="manual" class="form-row">
+          <label>Platform<select name="platform" id="manual-platform"></select></label>
+          <label>Date<input type="date" name="date"></label>
+          <label>Followers<input type="number" name="followers" min="0" required></label>
+          <label>Likes<input type="number" name="likes" min="0"></label>
+          <label>Comments<input type="number" name="comments" min="0"></label>
+          <label>Shares<input type="number" name="shares" min="0"></label>
+          <label>Impressions<input type="number" name="impressions" min="0"></label>
+          <label>Engagement %<input type="number" name="engagement_rate" min="0" step="0.01"></label>
+          <button class="btn primary">Save</button>
+        </form>
+      </div>
+    </section>
+
+    <section class="section" id="tab-rankings"><div id="rankings"></div></section>
+    <section class="section" id="tab-analytics"><div id="analytics"></div></section>
+
+    <section class="section" id="tab-plan">
+      <div id="recommendations"></div>
+      <div class="card" style="margin-top:16px">
+        <div class="card-head"><h2>Our plan (team checklist)</h2></div>
+        <form id="task-form" class="form-row" style="margin-bottom:10px">
+          <input name="title" placeholder="Add a task…" required style="flex:1;min-width:200px">
+          <select name="priority"><option value="high">High</option><option value="medium" selected>Medium</option><option value="low">Low</option></select>
+          <button class="btn">Add</button>
+        </form>
+        <div id="tasks"></div>
+      </div>
+    </section>
+
+    <section class="section" id="tab-share">
+      <div class="grid two">
+        <div class="card">
+          <h2>Create a shareable report link</h2>
+          <p class="small muted">Anyone with the link sees a read-only, always-up-to-date report. No login needed. Revoke it at any time.</p>
+          <form id="share-form">
+            <div class="form-row"><label>Name<input name="label" value="Pete Russo brand update" style="width:240px"></label>
+              <label>Period<select name="days"><option value="7">7 days</option><option value="30" selected>30 days</option><option value="90">90 days</option></select></label>
+              <label>Expires<select name="expiresInDays"><option value="7">in 7 days</option><option value="30">in 30 days</option><option value="90" selected>in 90 days</option><option value="0">never</option></select></label></div>
+            <div class="checks" id="share-sections"></div>
+            <button class="btn primary">Create link</button>
+          </form>
+        </div>
+        <div class="card">
+          <h2>Quick summary</h2>
+          <p class="small muted">Paste into email, Slack or text.</p>
+          <textarea id="summary" rows="12" style="width:100%" readonly></textarea>
+          <div class="form-row" style="margin-top:8px"><button class="btn" id="copy-summary">Copy</button><button class="btn" id="slack" hidden>Post to Slack</button><button class="btn" onclick="window.print()">Print / save PDF</button></div>
+        </div>
+      </div>
+      <div class="card" style="margin-top:16px"><h2>Active share links</h2><div id="shares"></div></div>
+    </section>
+
+    <section class="section" id="tab-settings"><div id="settings"></div></section>
+  </main>
+</div>
+<div class="toast" id="toast"></div>
+<script type="module" src="/assets/app.js"></script>
+</body>
+</html>

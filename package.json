@@ -1,0 +1,15 @@
+{
+  "name": "pete-russo-social",
+  "version": "1.0.0",
+  "description": "Brand command center for Pete Russo: web mentions, social engagement, search rankings, SEO recommendations and PeteRusso.com analytics.",
+  "type": "module",
+  "private": true,
+  "engines": { "node": ">=22.13" },
+  "scripts": {
+    "start": "node --no-warnings src/server.js",
+    "dev": "node --no-warnings --watch src/server.js",
+    "collect": "node --no-warnings src/cli.js collect",
+    "seed:demo": "node --no-warnings src/cli.js seed-demo",
+    "test": "node --no-warnings --test test/*.test.js"
+  }
+}
